@@ -1,0 +1,480 @@
+{
+	"info": {
+		"_postman_id": "99701c27-ef0c-4b7e-a807-edacc472956b",
+		"name": "Sales",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37956975"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "registerUser",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Albert",
+									"type": "text"
+								},
+								{
+									"key": "surname",
+									"value": "Perez",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "aperez",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "aperez@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "!2Dm8888888",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "ADMIN",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:2636/addUser",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2636",
+							"path": [
+								"addUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "userLoggin",
+									"value": "aperez",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "!2Dm8888888",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:2636/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2636",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ListUsers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2FmNTA3OWNmNjk0OGU4MjU1ZjBkN2MiLCJ1c2VybmFtZSI6ImFwZXJleiIsIm5hbWUiOiJBbGJlcnQiLCJyb2xlIjoiQ0xJRU5UIiwiaWF0IjoxNzM5NTQzMDE5LCJleHAiOjE3Mzk1NTM4MTl9.6d-zcIqbLr95HS2x-ZjFphP4mQDBiTiErJHWWYN0WXA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:2636/getUsers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2636",
+							"path": [
+								"getUsers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SearchUser",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2FmNTA3OWNmNjk0OGU4MjU1ZjBkN2MiLCJ1c2VybmFtZSI6ImFwZXJleiIsIm5hbWUiOiJBbGJlcnQiLCJyb2xlIjoiQ0xJRU5UIiwiaWF0IjoxNzM5NTQzMDE5LCJleHAiOjE3Mzk1NTM4MTl9.6d-zcIqbLr95HS2x-ZjFphP4mQDBiTiErJHWWYN0WXA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:2636/getUser/67af5079cf6948e8255f0d7c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2636",
+							"path": [
+								"getUser",
+								"67af5079cf6948e8255f0d7c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2FmNTA3OWNmNjk0OGU4MjU1ZjBkN2MiLCJ1c2VybmFtZSI6ImFwZXJleiIsIm5hbWUiOiJBbGJlcnQiLCJyb2xlIjoiQ0xJRU5UIiwiaWF0IjoxNzM5NTQzMDE5LCJleHAiOjE3Mzk1NTM4MTl9.6d-zcIqbLr95HS2x-ZjFphP4mQDBiTiErJHWWYN0WXA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Albert ",
+									"type": "text"
+								},
+								{
+									"key": "surname",
+									"value": "Perez",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "aperez",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "aperez@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "!2Dm8888888",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:2636/update/67af5079cf6948e8255f0d7c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2636",
+							"path": [
+								"update",
+								"67af5079cf6948e8255f0d7c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updatePassword",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2FmNTA3OWNmNjk0OGU4MjU1ZjBkN2MiLCJ1c2VybmFtZSI6ImFwZXJleiIsIm5hbWUiOiJBbGJlcnQiLCJyb2xlIjoiQ0xJRU5UIiwiaWF0IjoxNzM5NTQzMDE5LCJleHAiOjE3Mzk1NTM4MTl9.6d-zcIqbLr95HS2x-ZjFphP4mQDBiTiErJHWWYN0WXA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "oldPassword",
+									"value": "!2Dm8888888",
+									"type": "text"
+								},
+								{
+									"key": "newPassword",
+									"value": "!2Dm88811111",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:2636/updatePassword/67af5079cf6948e8255f0d7c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2636",
+							"path": [
+								"updatePassword",
+								"67af5079cf6948e8255f0d7c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateRole",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2FmNWViMDdjNDBjMjc2ZmQzZjUwNzQiLCJ1c2VybmFtZSI6ImFwZXJleiIsIm5hbWUiOiJBbGJlcnQiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3Mzk1NDYyOTQsImV4cCI6MTczOTU1NzA5NH0.sbFDKe8uYjGL1kr6nA4h7_SHXWCEIKPvktv_hWB5z04",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Albert Hans",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "surname",
+									"value": "Perez",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "username",
+									"value": "aperez",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "aperez@gmail.com",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "!2Dm8888888",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "rol",
+									"value": "CLIENT",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:2636/updateRol/67af5eb07c40c276fd3f5074",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2636",
+							"path": [
+								"updateRol",
+								"67af5eb07c40c276fd3f5074"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2FmNWViMDdjNDBjMjc2ZmQzZjUwNzQiLCJ1c2VybmFtZSI6ImFwZXJleiIsIm5hbWUiOiJBbGJlcnQiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3Mzk1NDYyOTQsImV4cCI6MTczOTU1NzA5NH0.sbFDKe8uYjGL1kr6nA4h7_SHXWCEIKPvktv_hWB5z04",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:2636/deleteUser/67af5079cf6948e8255f0d7c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2636",
+							"path": [
+								"deleteUser",
+								"67af5079cf6948e8255f0d7c"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "AddCategory",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2FmNWViMDdjNDBjMjc2ZmQzZjUwNzQiLCJ1c2VybmFtZSI6ImFwZXJleiIsIm5hbWUiOiJBbGJlcnQiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3Mzk1NDYyOTQsImV4cCI6MTczOTU1NzA5NH0.sbFDKe8uYjGL1kr6nA4h7_SHXWCEIKPvktv_hWB5z04",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Comestibles",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Productos alimenticios para el consumo diario, que incluyen desde alimentos frescos hasta procesados.",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:2636/addCategory",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2636",
+							"path": [
+								"addCategory"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listCategories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:2636/listCategories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2636",
+							"path": [
+								"listCategories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:2636/getCategory/67af701dbeb2a6f4544b78e2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2636",
+							"path": [
+								"getCategory",
+								"67af701dbeb2a6f4544b78e2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2FmNWViMDdjNDBjMjc2ZmQzZjUwNzQiLCJ1c2VybmFtZSI6ImFwZXJleiIsIm5hbWUiOiJBbGJlcnQiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3Mzk1NDYyOTQsImV4cCI6MTczOTU1NzA5NH0.sbFDKe8uYjGL1kr6nA4h7_SHXWCEIKPvktv_hWB5z04",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Alimentos",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Productos alimenticios para el consumo diario, que incluyen desde alimentos frescos hasta procesados.",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:2636/updateCategory/67af701dbeb2a6f4544b78e2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2636",
+							"path": [
+								"updateCategory",
+								"67af701dbeb2a6f4544b78e2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
