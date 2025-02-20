@@ -1,5 +1,23 @@
 import Category from './category.model.js'
 
+
+const createDefaultCategory = async () => {
+    try {
+        const count = await Category.countDocuments();
+        if (count === 0) {
+            const defaultCategory = new Category({ 
+                name: 'General', 
+                description: 'Categoría creada por defecto.' 
+            });
+            await defaultCategory.save();
+            console.log('Default category created successfully.');
+        }
+    } catch (error) {
+        console.error('Error creating default category:', error);
+    }
+};
+createDefaultCategory()
+
 export const add=async(req,res)=>{
     try{
         const data=req.body

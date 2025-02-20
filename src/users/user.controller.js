@@ -3,6 +3,24 @@ import { checkPassword, encrypt } from '../../utils/encryp.js'
 import { generateJwt } from '../../utils/jwt.js'
 import User from './user.model.js'
 
+
+export const addAdmin = async(req,res)=>{
+    try{
+        const user = new User(data)
+        user.password=await encrypt(user.password)
+        user.role='CLIENT'
+        await user.save()
+        return res.status(200).send(
+            { 
+            message: `Registered successfully, can be logged with username: ${user.username}`,
+            user
+            })
+    }catch(e){
+        console.error(e)
+        return res.status(500).send({message:'General error with user registration',e})
+    }
+}
+
 //Registrar
 export const add = async(req,res)=>{
     try{
@@ -123,7 +141,7 @@ export const get = async(req, res)=>{
 //Actualizar rol
 export const updateRol = async(req, res)=>{
     try{
-        const { id } = req.params
+        let id = req.user.uid
         const {rol} = req.body
         const validRoles = ["CLIENT", "ADMIN"];
         if (!validRoles.includes(rol)) {
@@ -168,7 +186,7 @@ export const updateRol = async(req, res)=>{
 //Actualizar contraseña
 export const updatePassword = async (req, res) => {
     try {
-        let { id } = req.params;
+        let id = req.user.uid
         let { newPassword, oldPassword } = req.body;
         let user = await User.findById(id);
         if (!user) return res.status(404).send({ message: 'User not found' });
@@ -189,7 +207,7 @@ export const updatePassword = async (req, res) => {
 //Actualizar datos generales
 export const update = async(req, res)=>{
     try{
-        const { id } = req.params
+        let id = req.user.uid
 
         const data = req.body
 
@@ -228,7 +246,7 @@ export const update = async(req, res)=>{
 
 export const deleteUser = async(req,res)=>{
     try{
-        let {id}=req.params
+        let id = req.user.uid
         let deltedUser=await User.findByIdAndDelete(id)
         if(!deltedUser) return res.status(404).send({message: 'User not found'})
             return res.send({message: 'User deleted succesfully', deltedUser})

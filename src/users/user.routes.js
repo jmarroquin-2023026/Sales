@@ -8,10 +8,10 @@ api.post('/addUser',registerVAlidator,add)
 api.post('/login',login)
 api.get('/getUsers',validateJwt,listUsers)
 api.get('/getUser/:id',get)
-api.put('/update/:id',validateJwt,updateUserValidator,isClient,update)
-api.put('/updatePassword/:id',validateJwt,updatePassword)
-api.put('/updateRol/:id',validateJwt,isClient,updateRoleValidator,updateRol)
-api.delete('/deleteUser/:id',validateJwt,isClient,deleteUser)
+api.put('/update',validateJwt,updateUserValidator,[isClient||isAdmin],update)
+api.put('/updatePassword',validateJwt,[isClient||isAdmin],updatePassword)
+api.put('/updateRol',validateJwt,isClient,updateRoleValidator,updateRol)
+api.delete('/deleteUser',validateJwt,isClient,deleteUser)
 
 export default api
 
