@@ -11,33 +11,52 @@
 			"item": [
 				{
 					"name": "registerUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "noauth"
 						},
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
 						"body": {
 							"mode": "urlencoded",
 							"urlencoded": [
 								{
 									"key": "name",
-									"value": "Albert",
+									"value": "Jose",
 									"type": "text"
 								},
 								{
 									"key": "surname",
-									"value": "Perez",
+									"value": "Retana",
 									"type": "text"
 								},
 								{
 									"key": "username",
-									"value": "aperez",
+									"value": "jretana",
 									"type": "text"
 								},
 								{
 									"key": "email",
-									"value": "aperez@gmail.com",
+									"value": "jretana@gmail.com",
 									"type": "text"
 								},
 								{
@@ -48,7 +67,8 @@
 								{
 									"key": "role",
 									"value": "ADMIN",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								}
 							]
 						},
@@ -67,7 +87,92 @@
 					"response": []
 				},
 				{
+					"name": "registerAdmin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Diego",
+									"type": "text"
+								},
+								{
+									"key": "surname",
+									"value": "Medina",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "dmedina",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "dmedina@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "!2Dm8888888",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "ADMIN",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:2636/adminRegister",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2636",
+							"path": [
+								"adminRegister"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Fixed typo in function name\r",
+									"var data = pm.response.json();\r",
+									"postman.setGlobalVariable(\"token\", data.token);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -76,7 +181,7 @@
 							"urlencoded": [
 								{
 									"key": "userLoggin",
-									"value": "aperez",
+									"value": "dmedina",
 									"type": "text"
 								},
 								{
@@ -107,8 +212,9 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2FmNTA3OWNmNjk0OGU4MjU1ZjBkN2MiLCJ1c2VybmFtZSI6ImFwZXJleiIsIm5hbWUiOiJBbGJlcnQiLCJyb2xlIjoiQ0xJRU5UIiwiaWF0IjoxNzM5NTQzMDE5LCJleHAiOjE3Mzk1NTM4MTl9.6d-zcIqbLr95HS2x-ZjFphP4mQDBiTiErJHWWYN0WXA",
-								"type": "text"
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2I1ZTU3MjAzZThjZDcwMzM2ZGJjNDgiLCJ1c2VybmFtZSI6ImpyZXRhbmEiLCJuYW1lIjoiSm9zZSIsInJvbGUiOiJDTElFTlQiLCJpYXQiOjE3Mzk5NzQwMTcsImV4cCI6MTczOTk4NDgxN30.Y6yfHZqXumQP-1-5BSFE-0xUELpTgOU49y7qJVQ3PXg",
+								"type": "text",
+								"disabled": true
 							}
 						],
 						"url": {
@@ -127,17 +233,18 @@
 				},
 				{
 					"name": "SearchUser",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2FmNTA3OWNmNjk0OGU4MjU1ZjBkN2MiLCJ1c2VybmFtZSI6ImFwZXJleiIsIm5hbWUiOiJBbGJlcnQiLCJyb2xlIjoiQ0xJRU5UIiwiaWF0IjoxNzM5NTQzMDE5LCJleHAiOjE3Mzk1NTM4MTl9.6d-zcIqbLr95HS2x-ZjFphP4mQDBiTiErJHWWYN0WXA",
-								"type": "text"
-							}
-						],
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
 						"url": {
-							"raw": "http://localhost:2636/getUser/67af5079cf6948e8255f0d7c",
+							"raw": "http://localhost:2636/getUser/67af968d6cdae78ec8ef5700",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -145,7 +252,7 @@
 							"port": "2636",
 							"path": [
 								"getUser",
-								"67af5079cf6948e8255f0d7c"
+								"67af968d6cdae78ec8ef5700"
 							]
 						}
 					},
@@ -158,7 +265,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2FmNTA3OWNmNjk0OGU4MjU1ZjBkN2MiLCJ1c2VybmFtZSI6ImFwZXJleiIsIm5hbWUiOiJBbGJlcnQiLCJyb2xlIjoiQ0xJRU5UIiwiaWF0IjoxNzM5NTQzMDE5LCJleHAiOjE3Mzk1NTM4MTl9.6d-zcIqbLr95HS2x-ZjFphP4mQDBiTiErJHWWYN0WXA",
+								"value": "{{token}}",
 								"type": "text"
 							}
 						],
@@ -167,42 +274,43 @@
 							"urlencoded": [
 								{
 									"key": "name",
-									"value": "Albert ",
+									"value": "Rene Alfredo",
 									"type": "text"
 								},
 								{
 									"key": "surname",
-									"value": "Perez",
+									"value": "Lopez",
 									"type": "text"
 								},
 								{
 									"key": "username",
 									"value": "aperez",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "email",
 									"value": "aperez@gmail.com",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "password",
-									"value": "!2Dm8888888",
+									"value": "!2Dm88888884",
 									"type": "text",
 									"disabled": true
 								}
 							]
 						},
 						"url": {
-							"raw": "http://localhost:2636/update/67af5079cf6948e8255f0d7c",
+							"raw": "http://localhost:2636/update",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "2636",
 							"path": [
-								"update",
-								"67af5079cf6948e8255f0d7c"
+								"update"
 							]
 						}
 					},
@@ -215,7 +323,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2FmNTA3OWNmNjk0OGU4MjU1ZjBkN2MiLCJ1c2VybmFtZSI6ImFwZXJleiIsIm5hbWUiOiJBbGJlcnQiLCJyb2xlIjoiQ0xJRU5UIiwiaWF0IjoxNzM5NTQzMDE5LCJleHAiOjE3Mzk1NTM4MTl9.6d-zcIqbLr95HS2x-ZjFphP4mQDBiTiErJHWWYN0WXA",
+								"value": "{{token}}",
 								"type": "text"
 							}
 						],
@@ -235,15 +343,14 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost:2636/updatePassword/67af5079cf6948e8255f0d7c",
+							"raw": "http://localhost:2636/updatePassword",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "2636",
 							"path": [
-								"updatePassword",
-								"67af5079cf6948e8255f0d7c"
+								"updatePassword"
 							]
 						}
 					},
@@ -256,7 +363,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2FmNWViMDdjNDBjMjc2ZmQzZjUwNzQiLCJ1c2VybmFtZSI6ImFwZXJleiIsIm5hbWUiOiJBbGJlcnQiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3Mzk1NDYyOTQsImV4cCI6MTczOTU1NzA5NH0.sbFDKe8uYjGL1kr6nA4h7_SHXWCEIKPvktv_hWB5z04",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2I1ZTU3MjAzZThjZDcwMzM2ZGJjNDgiLCJ1c2VybmFtZSI6ImpyZXRhbmEiLCJuYW1lIjoiSm9zZSIsInJvbGUiOiJDTElFTlQiLCJpYXQiOjE3Mzk5NzQwMTcsImV4cCI6MTczOTk4NDgxN30.Y6yfHZqXumQP-1-5BSFE-0xUELpTgOU49y7qJVQ3PXg",
 								"type": "text"
 							}
 						],
@@ -301,15 +408,14 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost:2636/updateRol/67af5eb07c40c276fd3f5074",
+							"raw": "http://localhost:2636/updateRol",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "2636",
 							"path": [
-								"updateRol",
-								"67af5eb07c40c276fd3f5074"
+								"updateRol"
 							]
 						}
 					},
@@ -322,20 +428,29 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2FmNWViMDdjNDBjMjc2ZmQzZjUwNzQiLCJ1c2VybmFtZSI6ImFwZXJleiIsIm5hbWUiOiJBbGJlcnQiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3Mzk1NDYyOTQsImV4cCI6MTczOTU1NzA5NH0.sbFDKe8uYjGL1kr6nA4h7_SHXWCEIKPvktv_hWB5z04",
+								"value": "{{token}}",
 								"type": "text"
 							}
 						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "password",
+									"value": "!2Dm88811111",
+									"type": "text"
+								}
+							]
+						},
 						"url": {
-							"raw": "http://localhost:2636/deleteUser/67af5079cf6948e8255f0d7c",
+							"raw": "http://localhost:2636/deleteUser",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "2636",
 							"path": [
-								"deleteUser",
-								"67af5079cf6948e8255f0d7c"
+								"deleteUser"
 							]
 						}
 					},
@@ -353,7 +468,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2FmNWViMDdjNDBjMjc2ZmQzZjUwNzQiLCJ1c2VybmFtZSI6ImFwZXJleiIsIm5hbWUiOiJBbGJlcnQiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3Mzk1NDYyOTQsImV4cCI6MTczOTU1NzA5NH0.sbFDKe8uYjGL1kr6nA4h7_SHXWCEIKPvktv_hWB5z04",
+								"value": "{{token}}",
 								"type": "text"
 							}
 						],
@@ -362,12 +477,12 @@
 							"urlencoded": [
 								{
 									"key": "name",
-									"value": "Comestibles",
+									"value": "Electronicos",
 									"type": "text"
 								},
 								{
 									"key": "description",
-									"value": "Productos alimenticios para el consumo diario, que incluyen desde alimentos frescos hasta procesados.",
+									"value": "Productos varios de electronica",
 									"type": "text"
 								}
 							]
@@ -390,7 +505,13 @@
 					"name": "listCategories",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "http://localhost:2636/listCategories",
 							"protocol": "http",
@@ -407,11 +528,18 @@
 				},
 				{
 					"name": "findById",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
 						"url": {
-							"raw": "http://localhost:2636/getCategory/67af701dbeb2a6f4544b78e2",
+							"raw": "http://localhost:2636/getCategory/67afa160e4fd8fcfba139193",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -419,7 +547,7 @@
 							"port": "2636",
 							"path": [
 								"getCategory",
-								"67af701dbeb2a6f4544b78e2"
+								"67afa160e4fd8fcfba139193"
 							]
 						}
 					},
@@ -432,7 +560,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2FmNWViMDdjNDBjMjc2ZmQzZjUwNzQiLCJ1c2VybmFtZSI6ImFwZXJleiIsIm5hbWUiOiJBbGJlcnQiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3Mzk1NDYyOTQsImV4cCI6MTczOTU1NzA5NH0.sbFDKe8uYjGL1kr6nA4h7_SHXWCEIKPvktv_hWB5z04",
+								"value": "{{token}}",
 								"type": "text"
 							}
 						],
@@ -441,18 +569,19 @@
 							"urlencoded": [
 								{
 									"key": "name",
-									"value": "Alimentos",
+									"value": "Productos de limpieza",
 									"type": "text"
 								},
 								{
 									"key": "description",
 									"value": "Productos alimenticios para el consumo diario, que incluyen desde alimentos frescos hasta procesados.",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								}
 							]
 						},
 						"url": {
-							"raw": "http://localhost:2636/updateCategory/67af701dbeb2a6f4544b78e2",
+							"raw": "http://localhost:2636/updateCategory/67afba2c7c9de9a6afe4491a",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -460,7 +589,386 @@
 							"port": "2636",
 							"path": [
 								"updateCategory",
-								"67af701dbeb2a6f4544b78e2"
+								"67afba2c7c9de9a6afe4491a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:2636/deleteCategory/67c4b0af30788c60ba43f2fe",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2636",
+							"path": [
+								"deleteCategory",
+								"67c4b0af30788c60ba43f2fe"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "AddProduct",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Tablet samsung Tab 9 FE",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Galaxy Tab S9 FE WIFI",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "540",
+									"type": "text"
+								},
+								{
+									"key": "stock",
+									"value": "6",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "67c4b51df9137ad6ade44bc8",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:2636/addProduct",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2636",
+							"path": [
+								"addProduct"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ListProducts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:2636/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2636",
+							"path": [
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindProduct",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:2636/getByCategory/67c4b51df9137ad6ade44bc8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2636",
+							"path": [
+								"getByCategory",
+								"67c4b51df9137ad6ade44bc8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ListSoldOut",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:2636/getSoldOut",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2636",
+							"path": [
+								"getSoldOut"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateProduct",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Tablet samsung Tab 9 fe",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Galaxy Tab S9 FE WIFI",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "2400",
+									"type": "text"
+								},
+								{
+									"key": "stock",
+									"value": "6",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "67c4b51df9137ad6ade44bc8",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:2636/updateProduct/67c4c8208aae31be8cda9b23",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2636",
+							"path": [
+								"updateProduct",
+								"67c4c8208aae31be8cda9b23"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteProduct",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:2636/deleteProduct/67c4c5b8af9de27780dfc272",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2636",
+							"path": [
+								"deleteProduct",
+								"67c4c5b8af9de27780dfc272"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TopSelling",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:2636/getTopSelling",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2636",
+							"path": [
+								"getTopSelling"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ShoppingCart",
+			"item": [
+				{
+					"name": "AddToCart",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"products\":[\r\n        {\r\n            \"product\":\"67c5035723dae0848d07bb0e\",\r\n            \"quantity\":2\r\n        },\r\n        {\r\n            \"product\":\"67c500c86a7860fd95127dab\",\r\n            \"quantity\":6\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2636/shop",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2636",
+							"path": [
+								"shop"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetShoppingCart",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:2636/getShopCart",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2636",
+							"path": [
+								"getShopCart"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Bill",
+			"item": [
+				{
+					"name": "AddBill",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "NIT",
+									"value": "2543762-5",
+									"type": "text"
+								},
+								{
+									"key": "cartId",
+									"value": "67c52776d65aa2afee5e0b5b",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:2636/generateBill",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2636",
+							"path": [
+								"generateBill"
 							]
 						}
 					},
@@ -470,7 +978,24 @@
 					"name": "New Request",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:2636/viewBills",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2636",
+							"path": [
+								"viewBills"
+							]
+						}
 					},
 					"response": []
 				}

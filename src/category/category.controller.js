@@ -1,5 +1,5 @@
 import Category from './category.model.js'
-
+import Product from '../product/product.model.js'
 
 const createDefaultCategory = async () => {
     try {
@@ -116,18 +116,44 @@ export const update=async(req,res)=>{
 }
 
 
-export const deleteC = async(req,res)=>{
+export const deleteC=async(req,res)=>{
     try{
-        const {id}=req.params
-        const deletedCategory=await Category.findByIdAndDelete(id)
-        if(!deletedCategory) return res.status(404).send({message:'Category not found'})
-            return res.status(200).send(
-        {
-            success:true,
-            message:'Category deleted succesfully'
-        })
+        const {id}=req.params;
+        let generalCategory=await Category.findOne({name:'General'})
+        if(!generalCategory){
+            generalCategory = new Category({name:'General'})
+            await generalCategory.save()
+        }
+        if(id==generalCategory._id){
+            return res.status(400).send(
+                {
+                    success:false,
+                    message:'General category cannot be deleted'
+                }
+            )
+        }
+        const deleteCategory=await Category.findById(id)
+        if(!deleteCategory){
+            return res.status(400).send(
+                {
+                    success:false,
+                    message:'Category not found'
+                }
+            )
+        }
+        await Product.updateMany(
+            {category:id},
+            {$set: {category:generalCategory._id}}
+        )
+        await Category.findByIdAndDelete(id)
+        return res.status(200).send(
+            {
+                success:true,
+                message:'Category delted successfully'
+            }
+        )
     }catch(e){
         console.error(e)
-        return res.status(500).send({message: 'General error',e})
+        return res.status(500).send({message:'Internal server error',e})
     }
 }

@@ -1,7 +1,8 @@
 //Validar campos en las rutas
 import { body } from "express-validator";
 import { validateErrors, validateErrorsWithoutFile } from "./validated.errors.js";
-import { existUsername,existEmail, notRquiredField, existCategory } from "../utils/db.validator.js";
+import { existUsername,existEmail, notRquiredField, existCategory, existProduct, objectValid } from "../utils/db.validator.js";
+import { isValidObjectId } from "mongoose";
 
 //Areglo de validaciones (por cada ruta)
 export const registerVAlidator=[
@@ -75,3 +76,16 @@ export const updateRoleValidator =[
     validateErrorsWithoutFile //Luego se modificara
 ]
 
+export const productValidator=[
+    body('name','Name cannot be empty').notEmpty().toLowerCase().custom(existProduct),
+    body('description','Description cannot be empty').notEmpty(),
+    body('price','Price cannot be empty').notEmpty(),
+    body('stock','Stock cannot be empty').notEmpty(),
+    body('category','Category cannot be empty').notEmpty(),
+    validateErrors
+]
+
+export const updateProduct=[
+    body('name').optional().notEmpty().toLowerCase().custom((name,{req})=>existProduct(name,{_id:req.params.id})),
+    validateErrorsWithoutFile
+]

@@ -6,9 +6,10 @@ import User from './user.model.js'
 
 export const addAdmin = async(req,res)=>{
     try{
+        const data=req.body
         const user = new User(data)
         user.password=await encrypt(user.password)
-        user.role='CLIENT'
+        user.role='ADMIN'
         await user.save()
         return res.status(200).send(
             { 
@@ -244,14 +245,31 @@ export const update = async(req, res)=>{
 
 
 
-export const deleteUser = async(req,res)=>{
-    try{
-        let id = req.user.uid
-        let deltedUser=await User.findByIdAndDelete(id)
-        if(!deltedUser) return res.status(404).send({message: 'User not found'})
-            return res.send({message: 'User deleted succesfully', deltedUser})
-    }catch(e){
-        console.error(e)
-        return res.status(500).send({message: 'General error',e})   
-    }
-}
+export const deleteUser = async(req, res) => {  
+    try {  
+        const { password } = req.body  
+        const id = req.user.uid  
+
+        const user = await User.findById(id)  
+        if (!user) return res.status(404).send({  
+            message: 'User not found'  
+        })  
+
+        let compare = await argon.verify(user.password, password); 
+        if (!compare) return res.status(401).send({  
+            message: 'Incorrect password'  
+        })  
+
+        const deletedUser = await User.findByIdAndDelete(id)  
+        return res.send({  
+            message: 'User deleted successfully',  
+            deletedUser  
+        })  
+    } catch (e) {  
+        console.error(e)  
+        return res.status(500).send({  
+            message: 'General error',  
+            e  
+        })  
+    }  
+}  

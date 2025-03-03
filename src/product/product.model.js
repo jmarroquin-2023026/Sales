@@ -9,7 +9,7 @@ export const producSchema=Schema(
         },
         description:{
             type:String,
-            maxLength:[50,`Can't be overcome 50 characters`],
+            maxLength:[250,`Can't be overcome 250 characters`],
             required:true
         },
         price:{
@@ -20,9 +20,13 @@ export const producSchema=Schema(
             type:Number,
             required:true
         },
+        sold:{
+            type:Number,
+            required:false
+        },
         category:{
             type:Schema.Types.ObjectId,
-            ref:'category',
+            ref:'Category',
             required:true
         }
         

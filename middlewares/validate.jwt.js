@@ -44,7 +44,9 @@ export const isAdmin=async(req,res,next)=>{
         console.error
         return res.status(403).send(
             {
-                sucess
+                success: false,
+                message: 'Internal server error',
+                e
             }
         )
     }
@@ -64,7 +66,38 @@ export const isClient=async(req,res,next)=>{
         console.error
         return res.status(403).send(
             {
-                sucess
+                success: false,
+                message: 'Internal server error',
+                e
+            }
+        )
+    }
+}
+
+export const isAdminOrClient=async (req,res,next) =>{
+    try {
+        const {user} = req
+        if (!user){
+            return res.status(403).send({
+                success: false,
+                message: 'No user data found in request'
+            })
+        }
+        if (user.role === 'ADMIN' || user.role === 'CLIENT') {
+            return next()
+        }
+        return res.status(403).send({
+            success: false,
+            message: `Access denied for role: ${user.role}`
+        });
+
+    } catch (e) {
+        console.error('Internal serverl Error', e);
+        return res.status(500).send(
+            {
+                success: false,
+                message: 'Internal server error',
+                e
             }
         )
     }

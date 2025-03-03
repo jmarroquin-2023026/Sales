@@ -1,6 +1,9 @@
+
+import mongoose from 'mongoose'
 import { isValidObjectId } from "mongoose";
 import User from '../src/users/user.model.js'
 import Category from '../src/category/category.model.js'
+import Product from '../src/product/product.model.js'
 
 export const existUsername = async(username, user)=>{
     const alreadyUsername = await User.findOne({username})
@@ -21,8 +24,16 @@ export const existEmail = async(email, user)=>{
 export const existCategory = async(name,category)=>{
     const alreadycategory = await Category.findOne({name})
     if(alreadycategory && alreadycategory._id != category.uid){
-        console.error(`Username ${name} is already taken`)
-        throw new Error(`Username ${name} is already taken`)
+        console.error(`Username ${name} is already exist`)
+        throw new Error(`Username ${name} is already exist`)
+    }
+}
+
+export const existProduct = async(name, product)=>{
+    const alreadyProduct = await Product.findOne({name})
+    if(alreadyProduct && alreadyProduct._id != product._id){
+        console.error(`Username ${name} is already exist`)
+        throw new Error(`Username ${name} is already exist`)
     }
 }
 
@@ -32,11 +43,16 @@ export const notRquiredField=(field)=>{
     }
 }
 
-export const objectValid=(objectId)=>{
-    if(!isValidObjectId(objectId)){
-        throw new Error(`Id is not a valid ObjectId`)
-    }
+export const objectValid = (objectId) => {  
+    if (!mongoose.Types.ObjectId.isValid(objectId)) {  
+        console.error(`Invalid ObjectId: ${objectId}`)  
+        return false  
+    }  
+    return true  
 }
+
+
+
 
 export const findUser=async(id)=>{
     try{
