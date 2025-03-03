@@ -83,14 +83,7 @@ export const addOrder = async (req,res) => {
 
         await shopCart.save()
 
-        for (const item of updatedProducts) {
-            await Product.findByIdAndUpdate(
-                item.product, 
-                { $inc: { stock: -item.quantity, sold: item.quantity } },  
-                { new: true }
-            )
-            
-        }
+        
         return res.status(200).send({
             success: true,
             message: "Products added to cart successfully",
@@ -129,5 +122,41 @@ export const list =async(req,res)=>{
     }catch(e){
         console.error(e)
         return res.status(500).send({message:'Internal server error',e})
+    }
+}
+
+
+export const removeProduct =async(req,res)=>{
+    try {
+        const { productId } = req.body
+        const {id} = req.user
+        const cart = await ShoppingCart.findOne({user:id})
+        if (!cart) return res.status(404).send(
+            {
+                success: false,
+                message: 'Shopping cart not found'
+            }
+        )
+        const productIndex = cart.products.findIndex(item => item.product == productId)
+        if (productIndex === -1) return res.status(404).send(
+            {
+                success: false,
+                message: 'Product not found in cart'
+            }
+        )
+        const product = await Product.findById(productId);
+        if (!product) return res.status(404).send(
+            {
+                success: false,
+                message: 'Product not found in database'
+            }
+        )
+        cart.total -= product.price * cart.products[productIndex].quantity
+        cart.products.splice(productIndex, 1)
+        await cart.save()
+        return res.status(200).send({success: true, message: 'Product removed from cart successfully', cart})
+    } catch (e) {
+        console.error(e)
+        return res.status(500).send({message: 'General error', e})
     }
 }

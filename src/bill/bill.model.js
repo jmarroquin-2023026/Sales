@@ -19,6 +19,10 @@ const billSchema=Schema(
             type:Schema.Types.ObjectId,
             ref:'ShoppingCart',
             required:true
+        },
+        status:{
+            type:Boolean,
+            default:true
         }
     }
 )

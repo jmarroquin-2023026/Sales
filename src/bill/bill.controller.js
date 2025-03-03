@@ -1,11 +1,12 @@
 import Bill from './bill.model.js'
 import ShopCart from '../shoppingCart/shoppingCart.model.js'
+import Product from '../product/product.model.js'
 
 export const addBill=async(req,res)=>{
     try{
         const user=req.user.uid
         const {cartId,NIT}=req.body
-        const shopCart=await ShopCart.findById(cartId)
+        const shopCart=await ShopCart.findById(cartId).populate('products.product')
         if(!shopCart){
             return res.status(404).send(
                 {
@@ -15,6 +16,16 @@ export const addBill=async(req,res)=>{
         }
         const bill=new Bill({user:user,purchase:cartId,NIT})
         await bill.save()
+       
+        let products = shopCart.products;
+        for (const item of products) {
+            await Product.findByIdAndUpdate(
+                item.product, 
+                { $inc: { stock: -item.quantity, sold: item.quantity } },  
+                { new: true }
+            )
+            
+        }
         return res.status(200).send(
             {
                 success:true,
