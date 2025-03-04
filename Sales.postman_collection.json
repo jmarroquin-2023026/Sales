@@ -477,12 +477,12 @@
 							"urlencoded": [
 								{
 									"key": "name",
-									"value": "Electronicos",
+									"value": "Deportes y Aire Libre",
 									"type": "text"
 								},
 								{
 									"key": "description",
-									"value": "Productos varios de electronica",
+									"value": "Equipos y accesorios para actividades deportivas y recreativas al aire libre, como ropa deportiva, bicicletas y camping.",
 									"type": "text"
 								}
 							]
@@ -533,13 +533,19 @@
 					},
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "urlencoded",
 							"urlencoded": []
 						},
 						"url": {
-							"raw": "http://localhost:2636/getCategory/67afa160e4fd8fcfba139193",
+							"raw": "http://localhost:2636/getCategory/67c60fbe3cc717714f972199",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -547,7 +553,7 @@
 							"port": "2636",
 							"path": [
 								"getCategory",
-								"67afa160e4fd8fcfba139193"
+								"67c60fbe3cc717714f972199"
 							]
 						}
 					},
@@ -570,18 +576,18 @@
 								{
 									"key": "name",
 									"value": "Productos de limpieza",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "description",
-									"value": "Productos alimenticios para el consumo diario, que incluyen desde alimentos frescos hasta procesados.",
-									"type": "text",
-									"disabled": true
+									"value": "Productos tecnológicos como teléfonos, computadoras y accesorios, diseñados para mejorar la comunicación, el entretenimiento y la productividad.",
+									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "http://localhost:2636/updateCategory/67afba2c7c9de9a6afe4491a",
+							"raw": "http://localhost:2636/updateCategory/67c6106f3cc717714f9721ad",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -589,7 +595,7 @@
 							"port": "2636",
 							"path": [
 								"updateCategory",
-								"67afba2c7c9de9a6afe4491a"
+								"67c6106f3cc717714f9721ad"
 							]
 						}
 					},
@@ -642,27 +648,27 @@
 							"urlencoded": [
 								{
 									"key": "name",
-									"value": "Tablet samsung Tab 9 FE",
+									"value": "Bicicleta de Montaña",
 									"type": "text"
 								},
 								{
 									"key": "description",
-									"value": "Galaxy Tab S9 FE WIFI",
+									"value": "Bicicleta resistente y versátil, ideal para aventuras al aire libre y terrenos irregulares.",
 									"type": "text"
 								},
 								{
 									"key": "price",
-									"value": "540",
+									"value": "2500",
 									"type": "text"
 								},
 								{
 									"key": "stock",
-									"value": "6",
+									"value": "8",
 									"type": "text"
 								},
 								{
 									"key": "category",
-									"value": "67c4b51df9137ad6ade44bc8",
+									"value": "67c611613cc717714f9721b5",
 									"type": "text"
 								}
 							]
@@ -719,7 +725,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:2636/getByCategory/67c4b51df9137ad6ade44bc8",
+							"raw": "http://localhost:2636/getByCategory/67c611433cc717714f9721b1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -727,7 +733,7 @@
 							"port": "2636",
 							"path": [
 								"getByCategory",
-								"67c4b51df9137ad6ade44bc8"
+								"67c611433cc717714f9721b1"
 							]
 						}
 					},
@@ -753,6 +759,31 @@
 							"port": "2636",
 							"path": [
 								"getSoldOut"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TopSelling",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:2636/getTopSelling",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2636",
+							"path": [
+								"getTopSelling"
 							]
 						}
 					},
@@ -835,31 +866,6 @@
 							"path": [
 								"deleteProduct",
 								"67c4c5b8af9de27780dfc272"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "TopSelling",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://localhost:2636/getTopSelling",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "2636",
-							"path": [
-								"getTopSelling"
 							]
 						}
 					},
@@ -994,6 +1000,41 @@
 							"port": "2636",
 							"path": [
 								"viewBills"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2636/updateBill/67c69254bde0e3ec2204a8c2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2636",
+							"path": [
+								"updateBill",
+								"67c69254bde0e3ec2204a8c2"
 							]
 						}
 					},
