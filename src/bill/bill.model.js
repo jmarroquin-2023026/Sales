@@ -1,30 +1,42 @@
-import { Schema,model } from "mongoose";
+import { Schema, model } from "mongoose";
 
-const billSchema=Schema(
+const billSchema = new Schema(
     {
-        date:{
-            type:Date,
-            default:Date.now()
+        date: {
+            type: Date,
+            default: Date.now
         },
-        NIT:{
-            type:String,
-            maxLength:[9,`Can't be overcome 9 characters`]
+        NIT: {
+            type: String,
+            maxLength: [9, "Can't be more than 9 characters"]
         },
-        user:{
-            type:Schema.Types.ObjectId,
-            ref:'User',
-            required:true,
+        user: {
+            type: Schema.Types.ObjectId,
+            ref: 'User',
+            required: true
         },
-        purchase:{
-            type:Schema.Types.ObjectId,
-            ref:'ShoppingCart',
-            required:true
+        purchase: {
+            type: Schema.Types.ObjectId,
+            ref: 'ShoppingCart',
+            required: true
         },
-        status:{
-            type:Boolean,
-            default:true
+        products:[{
+                product: { 
+                    type: Schema.Types.ObjectId, 
+                    ref:'Product', 
+                    name: String,
+                    price: Number,
+                    quantity: Number
+                }
+            }],
+        total: {
+            type:Number
+        },
+        status: {
+            type: Boolean,
+            default: true
         }
     }
 )
 
-export default model('Bill',billSchema)
+export default model('Bill', billSchema);
